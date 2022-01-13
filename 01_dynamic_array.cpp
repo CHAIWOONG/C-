@@ -110,7 +110,6 @@ int main()
 	// 배열 크기보다 큰 인덱스의 학생에 접근
 	try
 	{
-		// 아래 주석을 해제하면 프로그램이 비정상 종료합니다.
 		// class1[nStudents] = student {"John", 8}; // 예상할 수 없는 동작
 
 		class1.at(nStudents) = student{ "John", 8 }; // 예외 발생
