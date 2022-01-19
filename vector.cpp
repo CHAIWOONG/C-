@@ -4,14 +4,15 @@
 
 int main()
 {
-	vector<int> v;                       // int타입 벡터 생성
-	vector<int> v = { 1, 2, 3};          // int형 백터 생성 후 1, 2, 3 으로 초기화
-	vector<int> v[10];                   // int타입 벡터 배열(크기 : 10) 생성
-	vector<int> v[] = {{ 1, 2}, {3, 4}}; // int형 백터 배열 생성(행은 가변이지만 열은 고정)
-	vector<vector<int>> v;               // 2차원 백터 생성(행과 열 모두 가변)
-	vector<int> v(5);                    // 5개의 원소를 0으로 초기화
-	vector<int> v(5, 3);                 // 5개의 원소를 3으로 초기화
-	vector<int> v2(v);                   // 벡터 v를 복사하여 벡터v2 생성
+	vector<int> v1;                       // int타입 벡터 생성
+	vector<int> v2 = { 1, 2, 3};          // int형 백터 생성 후 1, 2, 3 으로 초기화
+	vector<int> v3[10];                   // int타입 벡터 배열(크기 : 10) 생성
+	vector<int> v4[] = {{ 1, 2}, {3, 4}}; // int형 백터 배열 생성(행은 가변이지만 열은 고정)
+	
+	vector<vector<int>> v5;               // 2차원 백터 생성(행과 열 모두 가변)
+	vector<int> v6(5);                    // 5개의 원소를 0으로 초기화
+	vector<int> v7(5, 3);                 // 5개의 원소를 3으로 초기화
+	vector<int> v8(v1);                   // 벡터 v를 복사하여 벡터v2 생성(복사 생성자)
 
 	v.push_back(10);  // 마지막 위치에 숫자 10 추가
 
@@ -29,34 +30,24 @@ int main()
 	v.capacity; //vector의 물리적 크기
 
 	 v.at(i) //vector의 i번째 요소 접근 at은 범위를 검사하여 범위 밖의 요소에 접근 시 예외처리를 발생 (std::out_of_range)
-	 v[i]
+	 v[i]  ///vector의 i번째 요소 접근
+		 
+		 
+	// 2차원 벡터에 대한 요소 입력의 예시		 
+	int N;
+        cin>>N;
+
+        vector<vector<int>> v(N, vector<int>(2,0)); // 2차원 백터(N*2) 생성(행은 N개 열은 0으로 2개)
+
+        for(int i = 0; i < N; i++){
+	   cin>>v[i][1];
+	   cin>>v[i][0];
+        }
+        sort(v.begin(),v.end());
+
+        for(int i = 0; i < v.size(); i++){
+	     cout<<v[i][1]<<" "<<v[i][0]<<'\n';
+        }
 }
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
 
-using namespace std;
-
-int main(){
-    
-    ios_base::sync_with_stdio(false);
-
-    int N;
-    cin>>N;
-    
-    vector<vector<int>> v(N, vector<int>(2,0));
-    
-    for(int i = 0; i < N; i++){
-        cin>>v[i][1];
-        cin>>v[i][0];
-    }
-    sort(v.begin(),v.end());
-
-    for(int i = 0; i < v.size(); i++){
-        cout<<v[i][1]<<" "<<v[i][0]<<'\n';
-    }
-    
-    return 0;
-
-}
