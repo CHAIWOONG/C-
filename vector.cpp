@@ -13,6 +13,8 @@ int main()
 	vector<int> v6(5);                    // 5개의 원소를 0으로 초기화
 	vector<int> v7(5, 3);                 // 5개의 원소를 3으로 초기화
 	vector<int> v8(v1);                   // 벡터 v를 복사하여 벡터v2 생성(복사 생성자)
+	vector<int> vec7=vector<int>(vec1.begin()+2, vec1.end());  //vec7은 vec1의 2번째 원소부터 마지막 원소까지 복사하여 생성
+	
 
 	v.push_back(10);  // 마지막 위치에 숫자 10 추가
 
@@ -22,6 +24,7 @@ int main()
 	it = v.insert(it+2, 2, 4); // 2번째부터 4를 2개 삽입
 
 	v.pop_back();                        // 마지막에 넣은 값 제거
+	vec1.erase(vec1.begin(), vec1.end());//모든 원소 삭제
 	v.erase(vec.begin()+10);             // index 10의 값을 제거
 	v.erase(vec.begin(), vec.begin()+5);  // index 0~5의 값을 제거
 	v.clear();                           //모든 값 제거
