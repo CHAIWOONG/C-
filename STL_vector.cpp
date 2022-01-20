@@ -16,15 +16,20 @@ int main()
 	vector<int> vec7=vector<int>(vec1.begin()+2, vec1.end());  //vec7은 vec1의 2번째 원소부터 마지막 원소까지 복사하여 생성
 	
 
-	v.push_back(10);  // 마지막 위치에 숫자 10 추가
+	v.push_back(10);  // 마지막 위치에 숫자 10 추가 (평균 시간 복잡도는 O(1)에 가깝다)
 
-	vector<int>::iterator it = v.begin();
-	it = v.insert(it, 2); //맨앞에 2를 삽입
+	v.insert(v.begin(),0);  // 벡터의 맨 앞에 0 추가
+	v.insert(find(v.begin(), v.end(), 1), 4); // 벡터에서 1을 찾아서 그 앞에 4를 추가
+	
+	vector<int>::iterator it = v.begin(); // 반복자 타입의 it 변수 생성
+	it = v.insert(it, 2); //맨앞에 2를 삽입 (평균 시간 복잡도는 O(n)에 가깝다)
 	it = v.insert(it, 2, 3); // 맨앞에 3을 2개 삽입
 	it = v.insert(it+2, 2, 4); // 2번째부터 4를 2개 삽입
 
-	v.pop_back();                        // 마지막에 넣은 값 제거
-	vec1.erase(vec1.begin(), vec1.end());//모든 원소 삭제
+	
+	v.pop_back();                        // 마지막에 넣은 값 제거 (시간 복잡도는 O(1))
+	
+	vec1.erase(vec1.begin(), vec1.end());//모든 원소 삭제 (시간 복잡도는 O(n)에 가깝다)
 	v.erase(vec.begin()+10);             // index 10의 값을 제거
 	v.erase(vec.begin(), vec.begin()+5);  // index 0~5의 값을 제거
 	v.clear();                           //모든 값 제거
