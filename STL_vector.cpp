@@ -36,7 +36,8 @@ int main()
 	 v[i]  ///vector의 i번째 요소 접근
 		 
 		 
-	// 2차원 벡터에 대한 요소 입력의 예시		 
+	// --------------2차원 벡터에 대한 요소 입력의 예시-------------
+		 
 	int N;
         cin>>N;
 
@@ -51,6 +52,21 @@ int main()
         for(int i = 0; i < v.size(); i++){
 	     cout<<v[i][1]<<" "<<v[i][0]<<'\n';
         }
+	
+	
+	// -------------- Ranged-based for loops를 사용한 출력의 예시 ----------------
+	
+	vector<int> v2 = { 1, 2, 3};  
+	
+	for(auto number : v2)                     // elemen declaration의 부분이 배열요소와 같은 타입이어야 하므로 auto 키워드를 통해 c++ 추론하도록 한다
+		cout<< number <<"\n";
+	
+	for(auto& number : v2)                    // 요소를 일일히 복사하는 것은 비용이 많이 들 수 있으므로 참조를 사용할 수 있다.
+		cout<< number <<"\n";
+	
+	for(const auto& number : v2)              // 요소의 사용은 읽기로만 이뤄지므로 const 참조를 사용할 수 있다
+		cout<< number <<"\n";
+ 	
 }
 
 
