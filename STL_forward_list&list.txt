@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <foward_list> 
+#include <list>
 
 using namespace std;
 
@@ -27,6 +28,17 @@ int main()
 	fwd_list.erase_after(it, fwd_list.end()) ; // 맨앞 원소 다음 부터 맨 마지막 원소까지 삭제
 
 	
-	
+	list<int> list = {1,2,3,4,5};
+   
+   	list.push_back(6);
+   
+   	list.insert(next(list.begin()),6);
+   	list.insert(list.begin(),6);
+  	 //list.insert(list.begin()+3,6);
+   
+  	 for(auto element: list)
+    	    cout<< element<<"\n";
+   
+   	return 0;
 	
 }
