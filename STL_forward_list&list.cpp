@@ -61,6 +61,11 @@ int main()
 	
         auto element = next(list.begin(),4); // list의 인덱스 참조는 next함수를 사용하여만 가능 (하나하나 다 접근해서 찾아가야 된다) 
 					     // vector의 경우 next 없이 사용 가능 auto element = v1.begin()+4; 
+	
+	auto begin = list.begin(); // 100
+	auto end = list.end(); // 5
+	// reverse_iterator 타입의 rbegin(), rend() 도 존재한다
+	
 	auto it = next(list.begin()); // *it == 1
 	auto it2 = list.insert(it, 10); // { 100,10,1,100,2,3,4,5 } it인 1자리에 10 추가하여 그자리의 it2를 받음 (*it2 == 10, *it == 1)
 
