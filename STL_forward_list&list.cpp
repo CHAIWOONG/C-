@@ -46,21 +46,21 @@ int main()
 	
 	list<int> list = {1,2,3,4,5};
 
-        list.push_front(6); // {6,1,2,3,4,5}
-        list.push_back(6);  // {6,1,2,3,4,5,6} 양방향에 대한 접근이 가능
+    list.push_front(6); // {6,1,2,3,4,5}
+    list.push_back(6);  // {6,1,2,3,4,5,6} 양방향에 대한 접근이 가능
    
-        list.pop_front(); // {1,2,3,4,5,6}
-        list.pop_back(); // {1,2,3,4,5} 양방향에 대한 접근이 가능
+    list.pop_front(); // {1,2,3,4,5,6}
+    list.pop_back(); // {1,2,3,4,5} 양방향에 대한 접근이 가능
    
-        //list.insert(100); 반복자에 대한 지정이 없으므로 오류 발생
-        list.insert(next(list.begin()),100);  // {1,100,2,3,4,5} 첫번째 원소 오른쪽에 100 추가
-        list.insert(list.begin(),100);   // {100,1,100,2,3,4,5} 첫번째 원소 자리에 100 추가
+    //list.insert(100); 반복자에 대한 지정이 없으므로 오류 발생
+    list.insert(next(list.begin()),100);  // {1,100,2,3,4,5} 첫번째 원소 오른쪽에 100 추가
+    list.insert(list.begin(),100);   // {100,1,100,2,3,4,5} 첫번째 원소 자리에 100 추가
    	
 	
 	//list.insert(list.begin()+3,6); list의 경우 이렇게 하면 오류 발생
 	
-        auto element = next(list.begin(),4); // list의 인덱스 참조는 next함수를 사용하여만 가능 (하나하나 다 접근해서 찾아가야 된다) 
-					     // vector의 경우 next 없이 사용 가능 auto element = v1.begin()+4; 
+    auto element = next(list.begin(),4); // list의 인덱스 참조는 next함수를 사용하여만 가능 (하나하나 다 접근해서 찾아가야 된다) 
+					    // vector의 경우 next 없이 사용 가능 auto element = v1.begin()+4; 
 	auto it = next(list.begin()); // *it == 1
 	auto it2 = list.insert(it, 10); // { 100,10,1,100,2,3,4,5 } it인 1자리에 10 추가하여 그자리의 it2를 받음 (*it2 == 10, *it == 1)
 
