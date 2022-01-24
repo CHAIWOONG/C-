@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <foward_list> 
 #include <list>
+#include <deque>
 
 using namespace std;
 
