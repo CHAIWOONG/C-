@@ -9,19 +9,16 @@ using namespace std;
 
 int main()
 {
-    
-    
 	// 벡터와 비슷한 방식으로 동적 할당을 이용해 구현이 되어있다.
 	string s;
 	string s(cnt, c); // 단, cnt는 정수, c는 char , c가 cnt개 있는 문자열 생성
 	string s("Hello World!"); 
 	string s = "Hello World!" // 리터럴 또는 const char*
 	string s(v.begin(), v.end());
-
-
+	
+	//------------------------------------------------------------------------------
 	string s(5, 'a'); // s = "aaaaa"
 	string t = "Hello World!";
-
 
 	s.pop_back(); // s = "aaaa"
 	s.push_back('b'); // s = "aaaab" = char 한개만 문자열 끝에 추가 
@@ -43,7 +40,7 @@ int main()
 	s.resize(3, 'a'); // s = "aaa" (string의 크기를 변경)
 	s.clear(); // s = "" (string의 모든 문자를 삭제)
 	
-	
+	// -------------------------------------------------------------------------------------------------------
 	string s1 = "ABCDE123";
 
 	cout << s1.length() << endl;        //output : 8
@@ -54,8 +51,8 @@ int main()
 	cout << s1.size() << endl;        //output : 8 실제 string의 길이는 여전
 	cout << s1.capacity() << endl;    //output : 111 설정한 크기봐 capacity가 여유있는 메모리 공간을 가짐
 
-	s.shrink_to_fit(); // 잉여 capacity 공간을 조절함
-	cout << s.capacity() << endl;    //output : 15 capacity의 크기가 복귀
+	s1.shrink_to_fit(); // 잉여 capacity 공간을 조절함
+	cout << s1.capacity() << endl;    //output : 15 capacity의 크기가 복귀
 
 
 	//---------------------------------------------------------------
@@ -125,6 +122,7 @@ int main()
 	cout << " - stoi(0x14, nullptr, 16) : " << stoi(str2, nullptr, 16) << endl;
 
 	// -----------------------------int -> string---------------------
+	
 	int num1 = 10;
 	float num2 = 22.1f;
 
@@ -132,8 +130,6 @@ int main()
 	string str1 = to_string(num1);
 	cout << "to_string(num1) : " << str1 << endl;  // 10
 	cout << "to_string(num2) : " << to_string(num2) << endl; // 22.1000000
-
-
 
 	//----------------------------------추가적 함수----------------
 	toupper(s[i]); // 소문자를 대문자로 변환
