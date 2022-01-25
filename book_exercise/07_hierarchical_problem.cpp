@@ -60,37 +60,39 @@ struct org_tree
 
 		return true;
 	}
+	
+	static void preOrder(node* start) // preorder traversal (VLR)
+	{
+		if(!start)
+			return;
+
+		std::cout<< start->position <<" ";
+		preOrder(start -> first);
+		preOrder(start -> second);
+	}
+
+	static void inOrder(node* start) // inorder traversal (LVR)
+	{
+		if(!start)
+			return;
+
+		inOrder(start -> first);
+		std::cout<< start->position <<" ";
+		inOrder(start -> second);
+	}
+
+	static void postOrder(node* start) // postorder traversal (LRV)
+	{
+		if(!start)
+			return;
+
+		postorder(start -> first);
+		postorder(start -> second);
+		std::cout<< start->position <<" ";
+	}
 };
 
-static void preOrder(node* start) // preorder traversal (VLR)
-{
-	if(!start)
-		return;
-	
-	std::cout<< start->position <<" ";
-	preOrder(start -> first);
-	preOrder(start -> second);
-}
 
-static void inOrder(node* start) // inorder traversal (LVR)
-{
-	if(!start)
-		return;
-	
-	inOrder(start -> first);
-	std::cout<< start->position <<" ";
-	inOrder(start -> second);
-}
-
-static void postOrder(node* start) // postorder traversal (LRV)
-{
-	if(!start)
-		return;
-	
-	postorder(start -> first);
-	postorder(start -> second);
-	std::cout<< start->position <<" ";
-}
 
 int main()
 {
