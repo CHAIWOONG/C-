@@ -13,54 +13,54 @@ struct median
 
 	void insert(int data) // 새로 들어온 데이터를 저장
 	{
-        if (maxHeap.size() == 0) // 비어있는 경우
-        {
-          maxHeap.push(data);
-          return;
-        }
+		if (maxHeap.size() == 0) // 비어있는 경우
+		{
+		  maxHeap.push(data);
+		  return;
+		}
 
-        if (maxHeap.size() == minHeap.size()) 
-        {
-          if (data <= get()) // 새로운 데이터가 기존 데이터의 중앙값보다 작으면 최대힙에 저장
-            maxHeap.push(data);
-          else              // 새로운 데이터가 기존 데이터의 중앙값보다 크면 최소힙에 저장
-            minHeap.push(data);
-          return;
-        }
+		if (maxHeap.size() == minHeap.size()) 
+		{
+		  if (data <= get()) // 새로운 데이터가 기존 데이터의 중앙값보다 작으면 최대힙에 저장
+		    maxHeap.push(data);
+		  else              // 새로운 데이터가 기존 데이터의 중앙값보다 크면 최소힙에 저장
+		    minHeap.push(data);
+		  return;
+		}
 
-        if (maxHeap.size() < minHeap.size()) 
-        {
-          if (data > get()) // 새로운 데이터가 기존 데이터의 중앙값보다 크면 최소힙에 저장
-          { 
-            maxHeap.push(minHeap.top()); // heap의 개수를 맞춰주기 위함
-            minHeap.pop();
-            minHeap.push(data);
-          }
-          else              // 새로운 데이터가 기존 데이터의 중앙값보다 작으면 최대힙에 저장
-            maxHeap.push(data);
-          return;
-        }
+		if (maxHeap.size() < minHeap.size()) 
+		{
+		  if (data > get()) // 새로운 데이터가 기존 데이터의 중앙값보다 크면 최소힙에 저장
+		  { 
+		    maxHeap.push(minHeap.top()); // heap의 개수를 맞춰주기 위함
+		    minHeap.pop();
+		    minHeap.push(data);
+		  }
+		  else              // 새로운 데이터가 기존 데이터의 중앙값보다 작으면 최대힙에 저장
+		    maxHeap.push(data);
+		  return;
+		}
 
-        if (data < get()) // 새로운 데이터가 기존 데이터의 중앙값보다 작으면 최대힙에 저장
-        {
-          minHeap.push(maxHeap.top());
-          maxHeap.pop();
-          maxHeap.push(data);
-        }
-        else              // 새로운 데이터가 기존 데이터의 중앙값보다 크면 최소힙에 저장
-          minHeap.push(data);
-    
+		if (data < get()) // 새로운 데이터가 기존 데이터의 중앙값보다 작으면 최대힙에 저장
+		{
+		  minHeap.push(maxHeap.top());
+		  maxHeap.pop();
+		  maxHeap.push(data);
+		}
+		else              // 새로운 데이터가 기존 데이터의 중앙값보다 크면 최소힙에 저장
+		  minHeap.push(data);
+
 	} // ----------------------------------insert()
 
 	double get() // 저장된 기존 데이터에서 중앙값을 구하여 반환
 	{
-        if (maxHeap.size() == minHeap.size()) // 데이터의 개수가 짝수
-          return (maxHeap.top() + minHeap.top()) / 2.0;
+		if (maxHeap.size() == minHeap.size()) // 데이터의 개수가 짝수
+		  return (maxHeap.top() + minHeap.top()) / 2.0;
 
-        if (maxHeap.size() < minHeap.size()) // 데이터의 개수가 홀수
-          return minHeap.top();
-    
-        return maxHeap.top(); // 데이터가 1개만 있는 경우  
+		if (maxHeap.size() < minHeap.size()) // 데이터의 개수가 홀수
+		  return minHeap.top();
+
+		return maxHeap.top(); // 데이터가 1개만 있는 경우  
     
 	} // ----------------------------------get()
 };
