@@ -39,26 +39,26 @@ std::ostream& operator<<(std::ostream& os, const city c)
 	}
 }
 
-struct graph
+struct graph // -------------------------------------그래프의 구조체 형태의 저장
 {
-	std::vector<std::vector<std::pair<int, int>>> data;
+	std::vector<std::vector<std::pair<int, int>>> data; //-----------------vector< vector<pair<int,int> >의 형태를 통해 adjacency list 구현
 
-	graph(int n)
+	graph(int n) // -------------------생성자, 비어있는 형태로 초기화 (-1의 초기값 할당 필요 없음)
 	{
-		data = std::vector<std::vector<std::pair<int, int>>>(n, std::vector<std::pair<int, int>>());
+		data = std::vector<std::vector<std::pair<int, int>>>(n, std::vector<std::pair<int, int>>()); 
 	}
 
-	void addEdge(const city c1, const city c2, int dis)
+	void addEdge(const city c1, const city c2, int dis) // --------------------------------------edge의 추가 함수
 	{
 		std::cout << "에지 추가: " << c1 << "-" << c2 << "=" << dis << std::endl;
 
 		auto n1 = static_cast<int>(c1);
 		auto n2 = static_cast<int>(c2);
-		data[n1].push_back({n2, dis});
-		data[n2].push_back({n1, dis});
+		data[n1].push_back({n2, dis}); 
+		data[n2].push_back({n1, dis});  // ---------------- pair를 통해 인접 도시 노드의 이름과 edge의 cost를 인자로 받아 각각 push_back 
 	}
 
-	void removeEdge(const city c1, const city c2)
+	void removeEdge(const city c1, const city c2) // --------------------------------------edge의 삭제 함수
 	{
 		std::cout << "에지 삭제: " << c1 << "-" << c2 << std::endl;
 
@@ -69,14 +69,14 @@ struct graph
 			});
 		std::remove_if(data[n2].begin(), data[n2].end(), [n1](const auto& pair) {
 			return pair.first == n1;
-			});
+			});   // ---------------- pair를 통해 인접 도시 노드의 이름과 edge의 cost를 인자로 받아 각각 push_back 
 	}
 };
 
 int main()
 {
 	graph g(6);
-	g.addEdge(city::LONDON, city::MOSCOW, 2500);
+	g.addEdge(city::LONDON, city::MOSCOW, 2500);  // 인자는 node1, node2, cost
 	g.addEdge(city::LONDON, city::SEOUL, 9000);
 	g.addEdge(city::LONDON, city::DUBAI, 5500);
 	g.addEdge(city::SEOUL, city::MOSCOW, 6600);
