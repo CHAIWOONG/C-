@@ -83,6 +83,21 @@ int main()
 		pq2.pop(); }
 	//top(), pop()을 빈 PQ에서 호출하는 것은 UB이며 일반적으로 런타임 에러를 발생
 	
+	// ----------------------------------------------------pair 를 사용한 priority queue -------------------------------------------------------------
+	priority_queue<pair<int,int>> temp;
+	temp.push(make_pair(3,100));
+	temp.push(make_pair(-2,140));
+	temp.push(make_pair(3,50));
+	temp.push(make_pair(49,12));
+	temp.push(make_pair(300,-20));
+	int sz = temp.size();
+	for(int i=0;i<sz;i++){
+		cout << temp.top().first << ',' << temp.top().second << '\n';
+		temp.pop();
+	}
+	// pair의 first에 대해서 비교한 후 같은 것에 대해 second에 대해서 비교함
+	// (300,-20) (49,12) (3,100) (3,50) (-2,140)
+	
 	
 	
 	return 0;
