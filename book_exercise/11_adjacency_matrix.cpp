@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-enum class city : int
+enum class city : int // --------------------------------도시 이름의 int 기반 저장
 {
 	MOSCOW,
 	LONDON,
@@ -11,7 +11,7 @@ enum class city : int
 	SYDNEY
 };
 
-std::ostream& operator<<(std::ostream& os, const city c)
+std::ostream& operator<<(std::ostream& os, const city c) // enum 클래스의 operator<< 정의
 {
 	switch (c)
 	{
@@ -38,40 +38,40 @@ std::ostream& operator<<(std::ostream& os, const city c)
 	}
 }
 
-struct graph
+struct graph // -------------------------------------그래프의 구조체 형태의 저장
 {
-	std::vector<std::vector<int>> data;
+	std::vector<std::vector<int>> data; //------------------[]*[] 행렬의 형태
 
-	graph(int n)
+	graph(int n) // graph 생성자 추가
 	{
-		data.reserve(n);
-		std::vector<int> row(n);
-		std::fill(row.begin(), row.end(), -1);
+		data.reserve(n); 			// data 구조체의 ~~
+		std::vector<int> row(n); 		// 행 백터의 선언
+		std::fill(row.begin(), row.end(), -1);  // fill 함수를 통해 행 백터를 -1의 초기 값으로 선언 (비어있는 상태의 표시)
 
 		for (int i = 0; i < n; i++)
 		{
-			data.push_back(row);
+			data.push_back(row);            // data 구조체 그래프에 각 열(columnn) 마다 행 백터 넣어둠 (data는 vector<vector<int>> 타입)
 		}
 	}
 
-	void addEdge(const city c1, const city c2, int dis)
+	void addEdge(const city c1, const city c2, int dis)  //------------------에지를 추가하는 함수
 	{
 		std::cout << "에지 추가: " << c1 << "-" << c2 << "=" << dis << std::endl;
 
-		auto n1 = static_cast<int>(c1);
-		auto n2 = static_cast<int>(c2);
+		auto n1 = static_cast<int>(c1);  //------------------ int 형변환
+		auto n2 = static_cast<int>(c2);  //------------------ int 형변환
 		data[n1][n2] = dis;
-		data[n2][n1] = dis;
+		data[n2][n1] = dis; // ----------------------------도시 사이의 거리를 의미하는 edge의 cost를 인자로 받아 각각 서로 할당 (양방향 graph) 
 	}
 
-	void removeEdge(const city c1, const city c2)
+	void removeEdge(const city c1, const city c2) //--------------------------에지를 삭제하는 함수
 	{
 		std::cout << "에지 삭제: " << c1 << "-" << c2 << std::endl;
 
 		auto n1 = static_cast<int>(c1);
 		auto n2 = static_cast<int>(c2);
 		data[n1][n2] = -1;
-		data[n2][n1] = -1;
+		data[n2][n1] = -1; // ----------------------------도시 사이의 거리의 삭제는 cost의 -1로 초기화를 통해 구현
 	}
 };
 
