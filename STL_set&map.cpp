@@ -10,7 +10,8 @@ int main()
 {	
 	// set, map은 자가 균형 이진 탐색 트리(BBST, self-balancing binary search tree)로 구현되어있는 자료구조로 대소관계가 정의된 자료형의 삽입, 삭제, 검색을 O(logn)에 처리 가능
 	// set, map은 1)원소의 삽입, 삭제가 빈번하게 일어나면서 2)원소의 정렬 상태를 유지해야 하고, 3)특정 원소를 검색하거나 수정할 필요가 있을 때 주로 사용 
-	// set, map은 같은 원소가 중복될 수 없음  (중복된 원소를 사용하고 싶다면 multiset, multimap을 이용)
+	
+	// *******set, map은 같은 원소가 중복될 수 없음  (중복된 원소를 사용하고 싶다면 multiset, multimap을 이용)
 	// set<int> S = { 1, 1, 2, 3 }으로 선언하면 S = { 1, 2, 3 }
 	// map은 같은 key값을 갖는 여러 { key, val }쌍이 존재할 수 없다
 	
@@ -65,7 +66,7 @@ int main()
 	for (auto& i : { 3, 1, 4, 1, 5 }) S.insert(i); // S = { 1, 3, 4, 5 }
 	for (auto& i : S) cout << i << ' '; cout << '\n'; // 1 3 4 5
 	
-	// count : set, map 내부의 val의 개수를 반환 (multiset, multimap이 아니라면 있으면 1, 없으면 0) O(logn)
+	// --------------------------------------*****count : set, map 내부의 val의 개수를 반환 (multiset, multimap이 아니라면 있으면 1, 없으면 0) O(logn)
 	if (S.count(2)) cout << "found 2" << '\n'; // x
 	if (S.count(3)) cout << "found 3" << '\n'; // o
 
@@ -77,9 +78,9 @@ int main()
 	// ------------------------------------------------------------------------- map 멤버함수------------------------------------------------------------------------
 	
 	map<string, int> M;
-	
+
 	M["abc"] = 3; // == M.insert({ "abc", 3 })
-	cout << M["abc"] << '\n'; // 3
+	cout << M["abc"] << '\n'; // 3 
 	M["abc"] = 4;
 	cout << M["abc"] << '\n'; // 4
 	
@@ -93,13 +94,14 @@ int main()
 	cout << "M.size() : " << M.size() << '\n'; // 0
 	cout << "M.empty() : " << M.empty() << '\n'; // 1
 	M.clear();
-
+	
+	// --------------------------------------------- map에서의 key와 value의 삽입
 	vector<string> s{ "ab", "cde", "fghi" };
 	vector<int> v{ 3, 1, 4 };
 	for (int i = 0; i < 3; i++) M[s[i]] = v[i];
 	for (auto& [a, b] : M) cout << '(' << a << ',' << b << ')' << ' '; cout << '\n'; // (ab,3) (cde,1) (fghi,4)
 
-	// count : set, map 내부의 val의 개수를 반환 (multiset, multimap이 아니라면 있으면 1, 없으면 0) O(logn)
+	// --------------------------------------*****count : set, map 내부의 val의 개수를 반환 (multiset, multimap이 아니라면 있으면 1, 없으면 0) O(logn)
 	if (M.count("abc")) cout << "found abc" << '\n'; // x
 	if (M.count("cde")) cout << "found cde" << '\n'; // o
 	
@@ -107,6 +109,34 @@ int main()
 	cout << M.count(3) << '\n'; // 0
 	M[3];
 	cout << M.count(3) << '\n'; // 1
+	
+	// ------------------------------------------------------------------------- set&map iterator------------------------------------------------------------------------
+	
+	// set, map의 iterator는 random access iterator가 아니라 bidirectional iterator이기 때문에 S.begin() + 3 등의 + 연산을 지원하지 않음
+	// 따라서 it을 이동시키기 위해선 it-- 또는 it++를 이용하거나 prev(it), next(it)을 이용
+	// 만약 여러 칸을 이동해야 한다면 std::advance를 사용한다 (이때 std::advance의 시간복잡도는 O(n))
+	// (it--, it++의 시간복잡도는 최악의 경우 O(logn)이지만 set, map 전체를 순회하는 시간복잡도는 O(n))
+	// terator간의 - 연산을 지원하지 않아서 it - S.begin() 등으로 인덱스를 구할 수 없다. 
+	// 이때 O(n)의 시간복잡도를 갖는 std::distance를 이용
+	
+	// set, map에는 front(), back()이 없기 때문에 *S.begin(), *prev(S.end()) 등으로 접근
+	// set, map의 begin(), end()의 시간복잡도는 O(1)
+	
+	// set, map의 iterator는 const_iterator이기 때문에 *it = val과 같이 참조를 이용해 직접 수정할 수 없다 
+	// 만약 원소를 수정하고 싶다면 set은 삭제 후 삽입, map은 []연산자를 이용
+	
+	set<int> S = { 1, 2, 3 ,4 }; // initializer_list
+	
+	auto it = S.begin(); // *it == 1
+	advance(it, 3); // *it == 4
+	advance(it, -2); // *it == 2
+	it = prev(it); // *it == 1
+	it = next(it); // *it == 2
+
+	cout << "dist : " << distance(S.begin(), it) << '\n'; // 1
+	cout << "dist : " << distance(it, S.begin()) << '\n'; // UB, last must be reachable from first by incrementing first
+
+	
 	
 	return 0;
 	
