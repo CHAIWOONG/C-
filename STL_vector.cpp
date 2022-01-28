@@ -4,6 +4,8 @@
 
 int main()
 {
+	// 주로 array를 사용하고, 그래프의 adjacency list를 구현할 때에 주로 vector를 사용하는 일이 많다.
+
 	vector<int> v1;                       // int타입 벡터 생성
 	vector<int> v2 = { 1, 2, 3};          // int형 백터 생성 후 1, 2, 3 으로 초기화
 	vector<int> v3[10];                   // int타입 벡터 배열(크기 : 10) 생성
@@ -62,8 +64,8 @@ int main()
         }
         sort(v.begin(),v.end());
 
-        for(int i = 0; i < v.size(); i++){
-	     cout<<v[i][1]<<" "<<v[i][0]<<'\n';
+        for(int i = 0; i < v.size(); i++){         // vector의 size() 함수의 경우, unsigned int 혹은 unsigned long long을 반환
+	     cout<<v[i][1]<<" "<<v[i][0]<<'\n';    // 이에 따라서 i<=v.size()-1과 같이 구현하게 되면 unsigned int overflow가 발생하게 되므로 런타임 오류가 발생한다
         }
 	
 	
@@ -72,10 +74,10 @@ int main()
 	vector<int> v2 = { 1, 2, 3};  
 	
 	for(auto number : v2)                     // elemen declaration의 부분이 배열요소와 같은 타입이어야 하므로 auto 키워드를 통해 c++ 추론하도록 한다
-		cout<< number <<"\n";
+		cout<< number <<"\n";		  // 참조자로 선언하지 않고 받고 있으므로 일일이 복사한 값이 number로 들어가게 된다
 	
 	for(auto& number : v2)                    // 요소를 일일히 복사하는 것은 비용이 많이 들 수 있으므로 참조를 사용할 수 있다.
-		cout<< number <<"\n";
+		cout<< number <<"\n";		  // &로 선언하여 받고 있으므로 원본의 주소가 number로 들어가게 되어 원본을 받게 된다
 	
 	for(const auto& number : v2)              // 요소의 사용은 읽기로만 이뤄지므로 const 참조를 사용할 수 있다
 		cout<< number <<"\n";
