@@ -51,7 +51,7 @@ int main()
 		pq2.pop(); }
 	//top(), pop()을 빈 PQ에서 호출하는 것은 UB이며 일반적으로 런타임 에러를 발생
 	
-	// ----------------------------------------------------pair 를 사용한 priority queue (MaxHeap, MinHeap) -------------------------------------------------------------
+	// ----------------------------------------------------pair 를 사용한 priority queue (MaxHeap, MinHeap) ---------------------------------------------------
 	priority_queue<pair<int,int>> temp; // ---------------------------------------------------// ******pair를 사용한 maxHeap의 정의 
 	temp.push(make_pair(3,100));
 	temp.push(make_pair(-2,140));
@@ -68,21 +68,22 @@ int main()
 	
 	priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq; // -----------------******pair를 사용한 minHeap의 정의
 	
-	//------------------------------------------------- 비교함수를 직접 만들어 줘야하는 경우
-	// pair 예제에서 첫 번째 값은 큰 순, 두 번째 값은 작은 순으로 정렬하고 싶은 경우
+	
+	//------------------------------------------------------ 비교함수를 직접 만들어 줘야하는 경우 -------------------------------------------------------------
+	// ex1) pair 예제에서 첫 번째 값은 큰 순, 두 번째 값은 작은 순으로 정렬하고 싶은 경우  ------------------------------------------------------------------------
 	
 	struct cmp {
-          bool operator()(pair<int, int>&a, pair<int, int>&b) { //연산자 오버로딩
-              if (a.first == b.first) {
-                  return a.second > b.second;
-              }
-              else {
-                  return a.first < b.first;
-              }
-          }
-      };
+	  bool operator()(pair<int, int>&a, pair<int, int>&b) { // ()연산자 오버로딩, ***인자를 pair<int,int> 타입의 & (참조자) 형태로 받고있다
+	      if (a.first == b.first) {
+		  return a.second > b.second;
+	      }
+	      else {
+		  return a.first < b.first;
+	      }
+	  }
+	};
 
-	priority_queue<pair<int,int>,vector<pair<int,int>>, cmp> pq;
+	priority_queue<pair<int,int>,vector<pair<int,int>>, cmp> pq; // 비교함수 자리에 cmp 삽입
 	pq.push({ 1,2 });
 	pq.push({ 2,2 });
 	pq.push({ 2,3 });
@@ -95,7 +96,7 @@ int main()
 		pq.pop();
 	}
 	
-	// 구조체를 pq에 저장하는 경우
+	// ex2) 구조체를 pq에 저장하는 경우  -----------------------------------------------------------------------------------------------------------------------
 	
 	struct Info
 	{
@@ -111,7 +112,7 @@ int main()
 		}
 	};
 	
-	priority_queue<Info,vector<Info>, cmp > pq;
+	priority_queue<Info,vector<Info>, cmp > pq; // struct 타입으로 priority_queue 
 	pq.push({ 1,2 });
 	pq.push({ 2,2 });
 	pq.push({ 2,3 });
