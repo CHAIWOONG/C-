@@ -68,7 +68,61 @@ int main()
 	
 	priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq; // -----------------******pair를 사용한 minHeap의 정의
 	
+	//------------------------------------------------- 비교함수를 직접 만들어 줘야하는 경우
+	// pair 예제에서 첫 번째 값은 큰 순, 두 번째 값은 작은 순으로 정렬하고 싶은 경우
 	
+	struct cmp {
+          bool operator()(pair<int, int>&a, pair<int, int>&b) { //연산자 오버로딩
+              if (a.first == b.first) {
+                  return a.second > b.second;
+              }
+              else {
+                  return a.first < b.first;
+              }
+          }
+      };
+
+	priority_queue<pair<int,int>,vector<pair<int,int>>, cmp> pq;
+	pq.push({ 1,2 });
+	pq.push({ 2,2 });
+	pq.push({ 2,3 });
+	pq.push({ 2,1 });
+	pq.push({ 1,1 });
+
+	while (!pq.empty())
+	{
+		cout << pq.top().first << pq.top().second << '\n';
+		pq.pop();
+	}
+	
+	// 구조체를 pq에 저장하는 경우
+	
+	struct Info
+	{
+		int x, y;
+	};
+
+	struct cmp {
+		bool operator()(Info &a, Info &b) {
+			if (a.x == b.x) {
+				return a.y < b.y;
+			}
+			return a.x > b.x;
+		}
+	};
+	
+	priority_queue<Info,vector<Info>, cmp > pq;
+	pq.push({ 1,2 });
+	pq.push({ 2,2 });
+	pq.push({ 2,3 });
+	pq.push({ 2,1 });
+	pq.push({ 1,1 });
+
+	while (!pq.empty())
+	{
+		cout << pq.top().x << pq.top().y << '\n';
+		pq.pop();
+	}
 	
 	return 0;
 	
