@@ -19,9 +19,10 @@ int main()
 	int w[5] = { 1, 2, 3, 4, 5 };
 	string s = "hello";
 
-	sort(v.begin(), v.end());
+	sort(v.begin(), v.end());     // v.begin은 시작원소, v.end()는 마지막 원소 다음 
 	//sort(v.rbegin(), v.rend()); // reverse iterator를 사용하여 ++해도 감소하므로 내림 차순으로 정렬
 	sort(w, w + 5, greater<>{}); // a > b를 리턴하는 greater<> functor를 이용하여 내림 차순으로 정렬
+				     // arr는 배열 이름(시작원소 포인터), a+(배열크기)
 	sort(s.begin(), s.end());
 
 	for (auto& i : v) cout << i << ' '; cout << '\n'; // 1 1 2 3 4 5 9
