@@ -39,6 +39,9 @@ int main()
 		q.pop();					// back : 가장 마지막에 넣은 원소를 reference로 반환. O(1) (잘 사용하진 않음)
 								// pop : 반환값은 void이며 front()가 아님
 	}
+	
+	while(!q.empty()) q.pop(); // queue는 vector의 .clear()와 같은 함수가 없기 때문에 일일이 queue가 완전히 빌 때 까지 pop하는 과정을 반복해야 한다.
+	
 	// [] 연산자나 iterator가 없기 때문에 front(), back() 이외의 원소에는 접근할 수 없다
 	// 큐가 비어있는데 front나 back이나 pop을 호출하면 런타임에러가 발생
 	
