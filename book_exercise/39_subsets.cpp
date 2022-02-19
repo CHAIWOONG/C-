@@ -16,8 +16,7 @@ using namespace std;
 
 const int UNKNOWN = -1;
 
-void GetAllSubsets(vector<int> set, vector<int> subset,
-	int index, vector<vector<vector<int>>>& allSubsets)
+void GetAllSubsets(vector<int> set, vector<int> subset, int index, vector<vector<vector<int>>>& allSubsets) // ------------------ brute force
 {
 	// 집합 set의 끝에 도달한 경우
 	if (index == set.size())
@@ -66,7 +65,7 @@ bool SubsetSum_BruteForce(vector<int> set, int target)
 	return false;
 }
 
-bool SubsetSum_Backtracking(vector<int> set, int sum, int i)
+bool SubsetSum_Backtracking(vector<int> set, int sum, int i) // ----------------------------------------------------------- back tracking
 {
 	// 만약 현재 부분집합의 합이 target과 같다면
 	if (sum == 0)
@@ -83,12 +82,10 @@ bool SubsetSum_Backtracking(vector<int> set, int sum, int i)
 	// Case 1: sum에서 set[i]을 빼서 재귀 호출 (i번째 원소를 부분집합에 추가)
 	// Case 2: sum을 그대로 전달하여 재귀 호출 (i번째 원소를 부분집합에 추가하지 않음)
 
-	return SubsetSum_Backtracking(set, sum - set[i], i + 1)
-		|| SubsetSum_Backtracking(set, sum, i + 1);
+	return SubsetSum_Backtracking(set, sum - set[i], i + 1) || SubsetSum_Backtracking(set, sum, i + 1);
 }
 
-bool SubsetSum_Memoization(vector<int>& set, int sum, int i,
-	vector<vector<int>>& memo)
+bool SubsetSum_Memoization(vector<int>& set, int sum, int i,vector<vector<int>>& memo) // ------------------------------- 메모이제이션
 {
 	// 만약 현재 부분집합의 합이 target과 같다면
 	if (sum == 0)
@@ -116,7 +113,7 @@ bool SubsetSum_Memoization(vector<int>& set, int sum, int i,
 	return memo[i][sum];
 }
 
-vector<vector<bool>> SubsetSum_Tabulation(vector<int>& set)
+vector<vector<bool>> SubsetSum_Tabulation(vector<int>& set) // ------------------------------- 타뷸레이션
 {
 	int maxSum = 0;
 
@@ -132,7 +129,7 @@ vector<vector<bool>> SubsetSum_Tabulation(vector<int>& set)
 		DP[i][0] = true;
 	}
 
-	for (int i = 1; i <= set.size(); i++)
+	for (int i = 1; i <= set.size(); i++) // *** 점화식의 구현
 	{
 		for (int sum = 1; sum <= maxSum; sum++)
 		{
