@@ -113,7 +113,7 @@ bool SubsetSum_Memoization(vector<int>& set, int sum, int i,vector<vector<int>>&
 	return memo[i][sum];
 }
 
-vector<vector<bool>> SubsetSum_Tabulation(vector<int>& set) // ------------------------------- 타뷸레이션
+vector<vector<bool>> SubsetSum_Tabulation(vector<int>& set) // ---------------------------------------------------------- 타뷸레이션
 {
 	int maxSum = 0;
 
