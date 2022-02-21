@@ -8,8 +8,8 @@ using namespace std;
 
 int main()
 {	
-	// set, map은 자가 균형 이진 탐색 트리(BBST, self-balancing binary search tree)로 구현되어있는 자료구조
-	// 대소관계가 정의된 자료형의 삽입, 삭제, 검색을 O(logn)에 처리 가능
+	// set, map은 자가 균형 이진 탐색 트리(BBST, self-balancing binary search tree)로 구현되어있는 자료구조 (Red-Black Tree)
+	// 대소관계가 정의된 자료형의 삽입, 삭제, 검색을 O(logn)에 처리 가능 (해시의 무작위성과 다르게 크기순으로 정렬되어 있다)
 	// set, map은 1)원소의 삽입, 삭제가 빈번하게 일어나면서 2)원소의 정렬 상태를 유지해야 하고, 3)특정 원소를 검색하거나 수정할 필요가 있을 때 주로 사용 
 	
 	// *******set, map은 같은 원소가 중복될 수 없음  (중복된 원소를 사용하고 싶다면 multiset, multimap을 이용)
@@ -17,7 +17,10 @@ int main()
 	// map은 같은 key값을 갖는 여러 { key, val }쌍이 존재할 수 없다
 	
 	// set은 컨테이너 내부의 원소들을 저장 
-	// map은 (key, val) pair를 순서대로 저장하여 M[key] = val와 같이 key로 val을 접근할 때 사용
+	// ***map은 (key, val) pair를 순서대로 저장하여 M[key] = val와 같이 key로 val을 접근할 때 사용
+	
+	// 만약 문제를 풀다가 뭔가 set, map 느낌의 성질이 필요하면서 특히 lower_bound나 prev, next 이런걸 사용해야만 풀리는 문제라면 꼭 STL set, map으로 해결을 해야함
+	// 반면에 그냥 key로 value를 빠르게 찾거나, 원소의 삽입/검색/삭제만 빠르게 처리를 해주어야 할 경우라면 STL unordered_set, unordered_map을 사용해도 상관이 
 	
 	// ---------------------------------------------------------------------- set & map------------------------------------------------------------------------
 	set<int> S; // 비어있는 set을 생성
@@ -49,8 +52,13 @@ int main()
 	
 	set<int> S = { 1, 2 }; // initializer_list
 	
+	auto it_1 = S.begin(); // it_1 = 1;
+	auto it_2 = it_1++; // it_2 = 2;
+	auto it_3 = prev(it_2); // it_3 = 1;
+	auto it_4 = advance(it_2,-1); // it_4 = 1; 
+	
 	// insert(val) : val을 삽입, val을 가리키는 iterator와 val의 삽입 여부(bool)를 pair로 반환 ( O(logn) )
-	auto [it1, flag1] = S.insert(2); // S = { 1, 2 }, *it1 == 2, flag1 == 0
+	auto [it1, flag1] = S.insert(2); // S = { 1, 2 }, *it1 == 2, flag1 == 0 (이미 있었으므로 false)
 	auto [it2, flag2] = S.insert(3); // S = { 1, 2, 3 }, *it2 == 3, flag2 == 1
 	
 	// erase(it) : 매개변수로 받은 iterator 위치의 원소를 삭제, 원래 위치의 다음 원소의 iterator를 반환. O(logn)
@@ -69,9 +77,13 @@ int main()
 	// --------------------------------------*****count : set, map 내부의 val의 개수를 반환 (multiset, multimap이 아니라면 있으면 1, 없으면 0) O(logn)
 	if (S.count(2)) cout << "found 2" << '\n'; // x
 	if (S.count(3)) cout << "found 3" << '\n'; // o
-
+	
+	auto lo2 = S.lower_bound(2); // *lo2 == 3
 	auto lo = S.lower_bound(3); // *lo == 3, *prev(lo) < 3 <= *lo (lower_bound를 반환 O(logn))
-	auto hi = S.upper_bound(3); // *lo == 4, *prev(lo) <= 3 < *lo (upper_bound를 반환. O(logn))
+	auto hi = S.upper_bound(3); // *hi == 4, *prev(lo) <= 3 < *lo (upper_bound를 반환. O(logn))
+	
+	cout<<*lo<<"\n"; // 3
+	cout<<*hi<<"\n"; // 4
 	
 	// ----------------------------------------------------------------------- map 멤버함수------------------------------------------------------------------------
 	
